@@ -438,37 +438,48 @@
                 showForDay(dayName, el("todayList"), el("todayEmpty"), el("todayDesc"));
             }
 
-            function initPicker() {
-                const dp = el("datePick");
+function initPicker() {
+  const dp = el("datePick");
 
-                // Default = i dag
-                const t = new Date();
-                const yyyy = t.getFullYear();
-                const mm = String(t.getMonth() + 1).padStart(2, "0");
-                const dd = String(t.getDate()).padStart(2, "0");
-                dp.value = `${yyyy}-${mm}-${dd}`;
+  // Start tomt: ingen dato, ingen resultater
+  dp.value = "";
+  el("pickPill").textContent = "—";
+  el("pickList").innerHTML = "";
+  el("pickEmpty").style.display = "block";
+  el("pickEmpty").textContent = "Vælg en dato og tryk Vis.";
 
-                function renderPicked() {
-                    if (!dp.value) return;
-                    const d = new Date(dp.value + "T12:00:00"); // midday = mere robust omkring sommertid
-                    const dayName = weekdayDa(d);
-                    el("pickPill").textContent = dayName;
+  function renderPicked() {
+    if (!dp.value) {
+      el("pickPill").textContent = "—";
+      el("pickList").innerHTML = "";
+      el("pickEmpty").style.display = "block";
+      el("pickEmpty").textContent = "Vælg en dato og tryk Vis.";
+      return;
+    }
 
-                    showForDay(dayName, el("pickList"), el("pickEmpty"), null);
-                }
+    const d = new Date(dp.value + "T12:00:00"); // midday = mere robust omkring sommertid
+    const dayName = weekdayDa(d);
+    el("pickPill").textContent = dayName;
 
-                el("btnPick").addEventListener("click", renderPicked);
-                dp.addEventListener("change", renderPicked);
-                renderPicked();
-            }
+    showForDay(dayName, el("pickList"), el("pickEmpty"), null);
+  }
 
-            initToday();
-            initPicker();
+  // Kun vis når man trykker "Vis"
+  el("btnPick").addEventListener("click", renderPicked);
 
-            // Opdater "I dag" hvert minut (hvis siden står åben)
-            setInterval(initToday, 60 * 1000);
-        })();
-    </script>
+  // Hvis du en dag vil have den auto-opdatere når man vælger dato, så aktiver denne:
+  // dp.addEventListener("change", renderPicked);
+}
+
+initToday();
+initPicker();
+
+// Opdater "I dag" hvert minut (hvis siden står åben)
+setInterval(initToday, 60 * 1000);
+})();
+</script>
 </body>
 </html>
+
+
 
