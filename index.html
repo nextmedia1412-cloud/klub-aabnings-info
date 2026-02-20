@@ -590,10 +590,16 @@ initPicker();
 
 // Opdater "I dag" hvert minut (hvis siden står åben)
 setInterval(initToday, 60 * 1000);
+            
+            if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("./sw.js");
+}
+            
 })();
 </script>
 </body>
 </html>
+
 
 
 
