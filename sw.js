@@ -1,4 +1,4 @@
-const CACHE = "klubinfo-v3";
+const CACHE = "klubinfo-v4";
 const ASSETS = [
   "./",
   "./index.html",
@@ -6,7 +6,8 @@ const ASSETS = [
   "./icon-192.png",
   "./icon-512.png",
   "./icon-192-maskable.png",
-  "./icon-512-maskable.png"
+  "./icon-512-maskable.png",
+  "./logo.png"
 ];
 
 self.addEventListener("install", (e) => {
@@ -15,7 +16,11 @@ self.addEventListener("install", (e) => {
 });
 
 self.addEventListener("activate", (e) => {
-  e.waitUntil(self.clients.claim());
+  e.waitUntil((async () => {
+    const keys = await caches.keys();
+    await Promise.all(keys.map(k => (k === CACHE ? null : caches.delete(k))));
+    await self.clients.claim();
+  })());
 });
 
 self.addEventListener("fetch", (e) => {
