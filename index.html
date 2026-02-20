@@ -52,13 +52,18 @@
             gap: 12px;
         }
 
-        .dot {
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            background: var(--orange);
-            box-shadow: 0 0 18px rgba(255,106,0,.55);
-        }
+        .logo{
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  border-radius: 10px;
+
+  /* Orange glow */
+  filter:
+    drop-shadow(0 0 6px rgba(255,106,0,.55))
+    drop-shadow(0 0 14px rgba(255,106,0,.40))
+    drop-shadow(0 0 26px rgba(255,138,42,.25));
+}
 
         h1 {
             margin: 0;
@@ -238,7 +243,7 @@
     <header>
         <div class="wrap">
             <div class="brand">
-                <div class="dot"></div>
+                <img class="logo" src="logo.png" alt="Next Level MC logo">
                 <div>
                     <h1>Next Level MC - Klub åbnings info</h1>
                     <div class="sub" id="todayLine">Indlæser…</div>
@@ -599,6 +604,7 @@ setInterval(initToday, 60 * 1000);
 </script>
 </body>
 </html>
+
 
 
 
