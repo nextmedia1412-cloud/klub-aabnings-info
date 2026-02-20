@@ -497,7 +497,7 @@
                 {
                     name: "THE OTHERS MC",
                     address: "Marienbergvej 92, 4760 Vordingborg",
-                    days: ["Tirsdag" ,"fredag],
+                    days: ["Tirsdag" ,"fredag"],
                     time: "17:30"
                 },
                 {
@@ -559,41 +559,40 @@
                 return Array.isArray(d) ? d : [String(d)];
             }
 
-            function renderClub(club) {
-    const box = document.createElement("div");
-    box.className = "club";
+function renderClub(club) {
+  const box = document.createElement("div");
+  box.className = "club";
 
-    const name = document.createElement("div");
-    name.className = "name";
-    name.textContent = club.name;
+  const name = document.createElement("div");
+  name.className = "name";
+  name.textContent = club.name;
 
-    // ✅ Adresse som klikbart Google Maps-link
-    const addr = document.createElement("a");
-    addr.className = "addr";
-    addr.href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(club.address);
-    addr.target = "_blank";
-    addr.rel = "noopener noreferrer";
-    addr.textContent = club.address;
+  const addr = document.createElement("a");
+  addr.className = "addr";
+  addr.href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(club.address);
+  addr.target = "_blank";
+  addr.rel = "noopener noreferrer";
+  addr.textContent = club.address;
 
-    const tags = document.createElement("div");
-    tags.className = "tags";
+  const tags = document.createElement("div");
+  tags.className = "tags";
 
-    const dayTag = document.createElement("div");
-    dayTag.className = "tag";
-    dayTag.textContent = getClubDays(club).join(", ");
+  const dayTag = document.createElement("div");
+  dayTag.className = "tag";
+  dayTag.textContent = getClubDays(club).join(", ");
 
-    const timeTag = document.createElement("div");
-    timeTag.className = "tag orange";
-    timeTag.textContent = club.time;
+  const timeTag = document.createElement("div");
+  timeTag.className = "tag orange";
+  timeTag.textContent = club.time;
 
-    tags.appendChild(dayTag);
-    tags.appendChild(timeTag);
+  tags.appendChild(dayTag);
+  tags.appendChild(timeTag);
 
-    box.appendChild(name);
-    box.appendChild(addr);
-    box.appendChild(tags);
+  box.appendChild(name);
+  box.appendChild(addr);
+  box.appendChild(tags);
 
-    return box;
+  return box;
 }
 
             
@@ -679,6 +678,7 @@ setInterval(initToday, 60 * 1000);
 </script>
 </body>
 </html>
+
 
 
 
