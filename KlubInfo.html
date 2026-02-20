@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="da">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Klub åbnings info</title>
+    <style>
+        :root {
+            --bg: #0b0b0d;
+            --text: #f2f2f3;
+            --muted: #b7b7be;
+            --orange: #ff6a00;
+            --orange2: #ff8a2a;
+            --border: rgba(255,255,255,.10);
+            --shadow: 0 10px 30px rgba(0,0,0,.35);
+            --radius: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+            background: radial-gradient(1200px 800px at 10% 0%, rgba(255,106,0,.16), transparent 55%), radial-gradient(900px 600px at 90% 10%, rgba(255,138,42,.10), transparent 50%), var(--bg);
+            color: var(--text);
+        }
+
+        header {
+            padding: 20px 18px 12px;
+            border-bottom: 1px solid var(--border);
+            background: rgba(11,11,13,.80);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--orange);
+            box-shadow: 0 0 18px rgba(255,106,0,.55);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 18px;
+            letter-spacing: .2px;
+        }
+
+        .sub {
+            margin: 4px 0 0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        main {
+            padding: 18px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            align-items: start;
+        }
+
+        @media (max-width: 900px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 14px;
+        }
+
+            .card h2 {
+                margin: 0 0 10px;
+                font-size: 15px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 10px;
+            }
+
+        .pill {
+            font-size: 12px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,106,0,.35);
+            color: var(--orange2);
+            background: rgba(255,106,0,.08);
+            white-space: nowrap;
+        }
+
+        .muted {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .divider {
+            height: 1px;
+            background: var(--border);
+            margin: 12px 0;
+        }
+
+        .row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        input {
+            font: inherit;
+            color: var(--text);
+            background: rgba(255,255,255,.04);
+            border: 1px solid rgba(255,255,255,.12);
+            border-radius: 12px;
+            padding: 10px 10px;
+            outline: none;
+        }
+
+            input:focus {
+                border-color: rgba(255,106,0,.55);
+                box-shadow: 0 0 0 3px rgba(255,106,0,.15);
+            }
+
+        button {
+            font: inherit;
+            color: var(--text);
+            border: 1px solid rgba(255,106,0,.50);
+            background: rgba(255,106,0,.12);
+            padding: 9px 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            user-select: none;
+            transition: transform .04s ease;
+        }
+
+            button:active {
+                transform: translateY(1px);
+            }
+
+        .list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .club {
+            background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01));
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 14px;
+            padding: 12px;
+        }
+
+        .name {
+            font-weight: 700;
+            letter-spacing: .2px;
+            margin-bottom: 2px;
+        }
+
+        .addr {
+            color: var(--muted);
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 12px;
+            padding: 5px 9px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,.12);
+            color: rgba(255,255,255,.88);
+            background: rgba(255,255,255,.03);
+        }
+
+            .tag.orange {
+                border-color: rgba(255,106,0,.45);
+                background: rgba(255,106,0,.10);
+                color: var(--orange2);
+            }
+
+        .empty {
+            display: none;
+            margin-top: 10px;
+            font-size: 13px;
+            color: rgba(255,255,255,.85);
+        }
+
+        .hint {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 8px;
+            line-height: 1.35;
+        }
+
+        code.inline {
+            padding: 2px 6px;
+            border-radius: 8px;
+            background: rgba(255,255,255,.06);
+            border: 1px solid rgba(255,255,255,.10);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="wrap">
+            <div class="brand">
+                <div class="dot"></div>
+                <div>
+                    <h1>Klub åbnings info</h1>
+                    <div class="sub" id="todayLine">Indlæser…</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="wrap grid">
+            <section class="card">
+                <h2>I dag <span class="pill" id="todayPill">—</span></h2>
+                <div class="muted" id="todayDesc">Finder klubber…</div>
+                <div class="divider"></div>
+                <div class="list" id="todayList"></div>
+                <div class="empty" id="todayEmpty">Ingen klubber med åbent i dag.</div>
+
+            </section>
+
+            <section class="card">
+                <h2>Vælg dato <span class="pill" id="pickPill">—</span></h2>
+                <div class="row">
+                    <input type="date" id="datePick" />
+                    <button id="btnPick">Vis</button>
+                </div>
+                <div class="hint">Vælg en dato — værktøjet finder ugedagen og viser klubber med åbent den dag.</div>
+
+                <div class="divider"></div>
+                <div class="list" id="pickList"></div>
+                <div class="empty" id="pickEmpty">Ingen klubber med åbent den dag.</div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        (() => {
+            /*
+              ✅ HER skriver du klubberne ind manuelt.
+
+              Brug days: [...] (anbefalet)
+                days = ["Mandag"] eller ["Tirsdag","Fredag"] osv.
+
+              (Valgfrit) Du kan også bruge day: "Onsdag" for klubber med én dag,
+              men days er bedst og mest konsistent.
+            */
+            const CLUBS = [
+                {
+                    name: "VENATORES MC",
+                    address: "Kastanie alle 1, 4520 Svinninge",
+                    days: ["Tirsdag"],
+                    time: "19:00 - 22:00"
+                },
+                {
+                    name: "THE CHOSEN MC",
+                    address: "Brostykkevej 11, 4650 Hvidovre",
+                    days: ["Torsdag"],
+                    time: "18:00 - 22:00"
+                },
+                {
+                    name: "DESPERADOS MC",
+                    address: "Høm møllevej 12, 4100 Ringsted",
+                    days: ["Onsdag"],
+                    time: "19:00 - 22:00"
+                },
+                {
+                    name: "SONS OF FREEDON MC",
+                    address: "Landevejen 8A, 4700 Næstved",
+                    days: ["Onsdag", "Fredag"],
+                    time: "19:00 - 22:00"
+                },
+                {
+                    name: "RTH RIDERS MC(Lige uger)",
+                    address: "Hedeager 6, 2605 Brøndby",
+                    days: ["Onsdag"],
+                    time: "17:00 - 22:00"
+                },
+                {
+                    name: "MC71",
+                    address: "Melbyfemvej 4, 4400 Kalundborg",
+                    days: ["Fredag"],
+                    time: "19:00 - 22:00"
+                },
+
+
+
+
+                // Eksempel med 2 dage:
+                // {
+                //   name: "Klub X",
+                //   address: "Adresse...",
+                //   days: ["Tirsdag", "Fredag"],
+                //   time: "19:00 - 23:00"
+                // },
+            ];
+
+            const DAYS = ["Søndag", "Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag"];
+            const el = (id) => document.getElementById(id);
+
+            function toDaDate(d) {
+                return d.toLocaleDateString("da-DK", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
+            }
+
+            function weekdayDa(d) {
+                return DAYS[d.getDay()];
+            }
+
+            function getClubDays(club) {
+                // Støtter både days: [...] og day: "Onsdag"
+                const d = club.days ?? club.day ?? [];
+                return Array.isArray(d) ? d : [String(d)];
+            }
+
+            function renderClub(club) {
+                const box = document.createElement("div");
+                box.className = "club";
+
+                const name = document.createElement("div");
+                name.className = "name";
+                name.textContent = club.name;
+
+                const addr = document.createElement("div");
+                addr.className = "addr";
+                addr.textContent = club.address;
+
+                const tags = document.createElement("div");
+                tags.className = "tags";
+
+                const dayTag = document.createElement("div");
+                dayTag.className = "tag";
+                dayTag.textContent = getClubDays(club).join(", ");
+
+                const timeTag = document.createElement("div");
+                timeTag.className = "tag orange";
+                timeTag.textContent = club.time;
+
+                tags.appendChild(dayTag);
+                tags.appendChild(timeTag);
+
+                box.appendChild(name);
+                box.appendChild(addr);
+                box.appendChild(tags);
+
+                return box;
+            }
+
+            function showForDay(dayName, listEl, emptyEl, descEl) {
+                listEl.innerHTML = "";
+
+                const matches = CLUBS.filter(club => {
+                    const days = getClubDays(club).map(x => String(x).trim());
+                    return days.includes(dayName);
+                });
+
+                if (descEl) descEl.textContent = `Klubber med åbent på ${dayName}: ${matches.length}`;
+
+                if (matches.length === 0) {
+                    emptyEl.style.display = "block";
+                    return;
+                }
+                emptyEl.style.display = "none";
+
+                // Sorter "best effort" efter tid-tekst
+                matches.sort((a, b) => (a.time || "").localeCompare(b.time || "", "da"));
+
+                for (const club of matches) {
+                    listEl.appendChild(renderClub(club));
+                }
+            }
+
+            function initToday() {
+                const now = new Date();
+                const dayName = weekdayDa(now);
+
+                el("todayLine").textContent = `I dag er det ${toDaDate(now)}.`;
+                el("todayPill").textContent = dayName;
+
+                showForDay(dayName, el("todayList"), el("todayEmpty"), el("todayDesc"));
+            }
+
+            function initPicker() {
+                const dp = el("datePick");
+
+                // Default = i dag
+                const t = new Date();
+                const yyyy = t.getFullYear();
+                const mm = String(t.getMonth() + 1).padStart(2, "0");
+                const dd = String(t.getDate()).padStart(2, "0");
+                dp.value = `${yyyy}-${mm}-${dd}`;
+
+                function renderPicked() {
+                    if (!dp.value) return;
+                    const d = new Date(dp.value + "T12:00:00"); // midday = mere robust omkring sommertid
+                    const dayName = weekdayDa(d);
+                    el("pickPill").textContent = dayName;
+
+                    showForDay(dayName, el("pickList"), el("pickEmpty"), null);
+                }
+
+                el("btnPick").addEventListener("click", renderPicked);
+                dp.addEventListener("change", renderPicked);
+                renderPicked();
+            }
+
+            initToday();
+            initPicker();
+
+            // Opdater "I dag" hvert minut (hvis siden står åben)
+            setInterval(initToday, 60 * 1000);
+        })();
+    </script>
+</body>
+</html>
