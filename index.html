@@ -724,8 +724,10 @@ function initPicker() {
     showForDay(dayName, el("pickList"), el("pickEmpty"), null);
   }
 
-  // Kun vis når man trykker "Vis"
-  el("btnPick").addEventListener("click", renderPicked);
+  // Vis både når man trykker "Vis" OG når man vælger dato (iPhone-fix)
+el("btnPick").addEventListener("click", renderPicked);
+dp.addEventListener("change", renderPicked); // iOS fyrer "change" når man er færdig med at vælge
+dp.addEventListener("input", renderPicked);  // nogle browsere bruger "input"
 
   // Hvis du en dag vil have den auto-opdatere når man vælger dato, så aktiver denne:
   // dp.addEventListener("change", renderPicked);
@@ -762,6 +764,7 @@ showGlobalSearch();
 </script>
 </body>
 </html>
+
 
 
 
