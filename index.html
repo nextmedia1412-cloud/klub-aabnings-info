@@ -255,6 +255,20 @@
     <main>
         <div class="wrap grid">
             <section class="card">
+  <h2>Søg klub <span class="pill" id="searchPill">—</span></h2>
+
+  <div class="row">
+    <input id="globalSearch" type="search" placeholder="Søg f.eks. The Others MC / by / adresse…" />
+    <button id="btnGlobalClear" type="button">Ryd</button>
+  </div>
+
+  <div class="hint">Søger i alle klubber (navn + adresse) og viser match med åbningstider.</div>
+
+  <div class="divider"></div>
+  <div class="list" id="globalList"></div>
+  <div class="empty" id="globalEmpty">Skriv noget i søgefeltet…</div>
+</section>
+            <section class="card">
                 <h2>I dag <span class="pill" id="todayPill">—</span></h2>
                 <div class="muted" id="todayDesc">Finder klubber…</div>
                 <div class="divider"></div>
@@ -678,6 +692,7 @@ setInterval(initToday, 60 * 1000);
 </script>
 </body>
 </html>
+
 
 
 
