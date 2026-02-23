@@ -293,477 +293,209 @@
     </main>
 
     <script>
-        (() => {
-            /*
-              ✅ HER skriver du klubberne ind manuelt.
+(() => {
+    // 1. Globale variabler i dette scope
+    let CLUBS = []; 
+    const DAYS = ["Søndag", "Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag"];
+    const el = (id) => document.getElementById(id);
 
-              Brug days: [...] (anbefalet)
-                days = ["Mandag"] eller ["Tirsdag","Fredag"] osv.
-
-              (Valgfrit) Du kan også bruge day: "Onsdag" for klubber med én dag,
-              men days er bedst og mest konsistent.
-            */
-            const CLUBS = [
-                {
-                    name: "VENATORES MC",
-                    address: "Kastanie alle 1, 4520 Svinninge",
-                    days: ["Tirsdag"],
-                    time: "19:00"
-                },
-                {
-                    name: "THE CHOSEN MC",
-                    address: "Brostykkevej 11, 4650 Hvidovre",
-                    days: ["Torsdag"],
-                    time: "18:00"
-                },
-                {
-                    name: "DESPERADOS MC",
-                    address: "Høm møllevej 12, 4100 Ringsted",
-                    days: ["Onsdag"],
-                    time: "19:00"
-                },
-                {
-                    name: "SONS OF FREEDON MC",
-                    address: "Landevejen 8A, 4700 Næstved",
-                    days: ["Onsdag", "Fredag"],
-                    time: "19:00"
-                },
-                {
-                    name: "RTH RIDERS MC(Lige uger)",
-                    address: "Hedeager 6, 2605 Brøndby",
-                    days: ["Onsdag"],
-                    time: "17:00"
-                },
-                {
-                    name: "MC71",
-                    address: "Melbyfemvej 4, 4400 Kalundborg",
-                    days: ["Fredag"],
-                    time: "19:00"
-                },
-                {
-                    name: "BLACK EAGLES MC",
-                    address: "Nykøbingvej 194, 4571 Grevinge",
-                    days: ["Tirsdag", "Fredag"],
-                    time: "19:00"
-                },
-                {
-                    name: "LAZY BONES MC",
-                    address: "KALBYVEJ 32, 4684 Holmegaard",
-                    days: ["Fredag"],
-                    time: "19:00"
-                },
-                {
-                    name: "UDBRYDERNE MC",
-                    address: "Roskildevej 291, 4100 Ringsted",
-                    days: ["Fredag"],
-                    time: "20:00"
-                },
-                {
-                    name: "GRUMPY OLD MEN MC",
-                    address: "Ørnholmvej 2B, 3550 Slangerup",
-                    days: ["Torsdag"],
-                    time: "18:00"
-                },
-                {
-                    name: "THUNDEROUS MC",
-                    address: "Industrivej 35, 4230 Skælskør",
-                    days: ["Torsdag"],
-                    time: "17:00"
-                },
-                {
-                    name: "MC SNEGLENE",
-                    address: "Hedeager 10, 2605 Brøndby",
-                    days: ["Fredag"],
-                    time: "19:00"
-                },
-                {
-                    name: "LOUD N PROUD MC",
-                    address: "Kantatevej 32, 2730 Herlev",
-                    days: ["Tirsdag"],
-                    time: "17:30"
-                },
-                {
-                    name: "MC HEDEN",
-                    address: "Lillemosevej 5, 2640 Hedehusene",
-                    days: ["Onsdag"],
-                    time: "19:00"
-                },
-                {
-                    name: "STENLØSE MC",
-                    address: "Gymnasievej 3, 3660 Stenløse",
-                    days: ["Onsdag"],
-                    time: "19:00"
-                },
-                {
-                    name: "MORGENHÅR MC",
-                    address: "Skalbakken 8B, 2720 Vanløse",
-                    days: ["Onsdag"],
-                    time: "19:00"
-                },
-                {
-                    name: "WARRIORS MC",
-                    address: "Brogade 6, 4690 Haslev",
-                    days: ["Onsdag"],
-                    time: "19:00"
-                },
-                {
-                    name: "IN SAINTZ MC",
-                    address: "Klintehøj vænge 21, 3460 Birkerød",
-                    days: ["Fredag"],
-                    time: "17:00"
-                },
-                {
-                    name: "WASTELAND MC",
-                    address: "Udby Kirkevej 13, 4300 Holbæk",
-                    days: ["Fredag"],
-                    time: "20:00"
-                },
-                {
-                    name: "IRONHEAD MC",
-                    address: "Østre Vindingevej 198, 4000 Roskilde",
-                    days: ["Tirsdag", "Fredag"],
-                    time: "17:30"
-                },
-                {
-                    name: "HOLBÆK MOTORCYKELKLUB",
-                    address: "Tuse Skovvej 5, 4300 Holbæk",
-                    days: ["Onsdag" ,"Fredag"],
-                    time: "20:00"
-                },
-                {
-                    name: "MC SUSÅ",
-                    address: "Lille Englebjergvej 4, 4700 Næstved",
-                    days: ["Fredag"],
-                    time: "19:30"
-                },
-                {
-                    name: "RIDERS MC",
-                    address: "Murervej 9, 4370 Store Merløse",
-                    days: ["Fredag"],
-                    time: "19:00"
-                },
-                {
-                    name: "BROTHERHOOD MC",
-                    address: "Stæremosen 22, 3250 Gilleleje",
-                    days: ["Fredag"],
-                    time: "17:00"
-                },
-                {
-                    name: "EXTERMINATORS MC",
-                    address: "Beldringevej 203, 5270 Odense N",
-                    days: ["Torsdag"],
-                    time: "19:00"
-                },
-                {
-                    name: "FALCON´S MC - Ulige uger",
-                    address: "Ørstedvej 54, 4130 Viby Sjælland",
-                    days: ["Torsdag"],
-                    time: "19:00"
-                },
-                {
-                    name: "WILD DEMONS MC",
-                    address: "Beldringevej 203, 5270 Odense N",
-                    days: ["Tirsdag"],
-                    time: "19:00"
-                },
-                {
-                    name: "WAYFINDERS MC",
-                    address: "Industrivænget 8, 3320 Skævinge",
-                    days: ["Onsdag" ,"Fredag"],
-                    time: "18:00"
-                },
-                {
-                    name: "THE LAST VIKING - Sidste Fredag",
-                    address: "Hestehavebakken 96, 4400 Kalundborg",
-                    days: ["Onsdag" ,"Fredag"],
-                    time: "19:00"
-                },
-                {
-                    name: "LA FUTURA MC",
-                    address: "Bistrupgade 12, 4700",
-                    days: ["Onsdag" ,"Fredag"],
-                    time: "19:00"
-                },
-                {
-                    name: "BIKER BITCHES MC",
-                    address: "Aalborgvej 22, 8620 Kjellerup",
-                    days: ["Onsdag"],
-                    time: "18:30"
-                },
-                {
-                    name: "GHOST RIDERS MC",
-                    address: "Storegade 158A, 6560 Sommersted",
-                    days: ["Onsdag"],
-                    time: "18:00"
-                },
-                {
-                    name: "UNDERGROUND INCORPORATED MC",
-                    address: "Nyborgvej 28B, 5550 Langeskov",
-                    days: ["Torsdag"],
-                    time: "19:00"
-                },
-                {
-                    name: "NO NAME MC EAST",
-                    address: "Riserupvej 23, 4840 Nørrealslev",
-                    days: ["Fredag"],
-                    time: "19:00"
-                },
-                {
-                    name: "THE OTHERS MC",
-                    address: "Marienbergvej 92, 4760 Vordingborg",
-                    days: ["Tirsdag" ,"Fredag"],
-                    time: "17:30"
-                },
-                {
-                    name: "KNIGHTS OF ODIN MC - Sidste Fredag",
-                    address: "Dalbyvej 90, 8722 Hedensted",
-                    days: ["Fredag"],
-                    time: "17:30"
-                },
-                {
-                    name: "POW MIA EAGLES MC - Ulige uger",
-                    address: "Møllerisvej 3, 3320 Skævinge",
-                    days: ["Fredag"],
-                    time: "17:00"
-                },
-                {
-                    name: "WHY NOT MC",
-                    address: "Hellerupvej 15, 8800 Viborg",
-                    days: ["Fredag"],
-                    time: "19:00"
-                },
-                {
-                    name: "WRENCHING APES MC",
-                    address: "Langgade 72, 7500",
-                    days: ["Torsdag"],
-                    time: "19:00"
-                },
-                {
-                    name: "RELOADED MC",
-                    address: "juliesmindevej 21, 4180 sorø",
-                    days: ["Tirsdag"],
-                    time: "18:00"
-                },
-                
-                
-                
-                
-
-
-
-
-
-                // Eksempel med 2 dage:
-                // {
-                //   name: "Klub X",
-                //   address: "Adresse...",
-                //   days: ["Tirsdag", "Fredag"],
-                //   time: "19:00 - 23:00"
-                // },
-            ];
-
-            const DAYS = ["Søndag", "Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag"];
-            const el = (id) => document.getElementById(id);
-
-            function toDaDate(d) {
-                return d.toLocaleDateString("da-DK", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
-            }
-
-            function weekdayDa(d) {
-                return DAYS[d.getDay()];
-            }
-
-            function getClubDays(club) {
-                // Støtter både days: [...] og day: "Onsdag"
-                const d = club.days ?? club.day ?? [];
-                return Array.isArray(d) ? d : [String(d)];
-            }
-
-function renderClub(club) {
-  const box = document.createElement("div");
-  box.className = "club";
-
-  const name = document.createElement("div");
-  name.className = "name";
-  name.textContent = club.name;
-
-  const addr = document.createElement("a");
-  addr.className = "addr";
-  addr.href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(club.address);
-  addr.target = "_blank";
-  addr.rel = "noopener noreferrer";
-  addr.textContent = club.address;
-
-  const tags = document.createElement("div");
-  tags.className = "tags";
-
-  const dayTag = document.createElement("div");
-  dayTag.className = "tag";
-  dayTag.textContent = getClubDays(club).join(", ");
-
-  const timeTag = document.createElement("div");
-  timeTag.className = "tag orange";
-  timeTag.textContent = club.time;
-
-  tags.appendChild(dayTag);
-  tags.appendChild(timeTag);
-
-  box.appendChild(name);
-  box.appendChild(addr);
-  box.appendChild(tags);
-
-  return box;
-} 
-            function norm(s) {
-  return String(s || "")
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
-}
-
-function matchesSearch(club, q) {
-  const hay = norm(`${club.name} ${club.address}`);
-  return hay.includes(q);
-}
-
-function showGlobalSearch() {
-  const input = el("globalSearch");
-  const listEl = el("globalList");
-  const emptyEl = el("globalEmpty");
-  const pill = el("searchPill");
-
-  if (!input || !listEl || !emptyEl || !pill) return;
-
-  const q = norm(input.value);
-  listEl.innerHTML = "";
-
-  if (!q) {
-    pill.textContent = "—";
-    emptyEl.style.display = "block";
-    emptyEl.textContent = "Skriv noget i søgefeltet…";
-    return;
-  }
-
-  const matches = CLUBS
-    .filter(club => matchesSearch(club, q))
-    .sort((a, b) => (a.name || "").localeCompare(b.name || "", "da"));
-
-  pill.textContent = `${matches.length} match`;
-
-  if (matches.length === 0) {
-    emptyEl.style.display = "block";
-    emptyEl.textContent = "Ingen match.";
-    return;
-  }
-
-  emptyEl.style.display = "none";
-  for (const club of matches) {
-    listEl.appendChild(renderClub(club));
-  }
-}
-
+    // 2. Hent data fra JSON
+    async function loadData() {
+        try {
+            const response = await fetch('clubs.json');
+            if (!response.ok) throw new Error("Kunne ikke hente clubs.json");
             
-
-            function showForDay(dayName, listEl, emptyEl, descEl) {
-                listEl.innerHTML = "";
-
-                const matches = CLUBS.filter(club => {
-                    const days = getClubDays(club).map(x => String(x).trim());
-                    return days.includes(dayName);
-                });
-
-                if (descEl) descEl.textContent = `Klubber med åbent på ${dayName}: ${matches.length}`;
-
-                if (matches.length === 0) {
-                    emptyEl.style.display = "block";
-                    return;
-                }
-                emptyEl.style.display = "none";
-
-                // Sorter "best effort" efter tid-tekst
-                matches.sort((a, b) => (a.time || "").localeCompare(b.time || "", "da"));
-
-                for (const club of matches) {
-                    listEl.appendChild(renderClub(club));
-                }
-            }
-
-            function initToday() {
-                const now = new Date();
-                const dayName = weekdayDa(now);
-
-                el("todayLine").textContent = `I dag er det ${toDaDate(now)}.`;
-                el("todayPill").textContent = dayName;
-
-                showForDay(dayName, el("todayList"), el("todayEmpty"), el("todayDesc"));
-            }
-
-function initPicker() {
-  const dp = el("datePick");
-
-  // Start tomt: ingen dato, ingen resultater
-  dp.value = "";
-  el("pickPill").textContent = "—";
-  el("pickList").innerHTML = "";
-  el("pickEmpty").style.display = "block";
-  el("pickEmpty").textContent = "Vælg en dato og tryk Vis.";
-
-  function renderPicked() {
-    if (!dp.value) {
-      el("pickPill").textContent = "—";
-      el("pickList").innerHTML = "";
-      el("pickEmpty").style.display = "block";
-      el("pickEmpty").textContent = "Vælg en dato og tryk Vis.";
-      return;
+            CLUBS = await response.json();
+            
+            // Først når data er hentet, starter vi visningen
+            initToday();
+            initPicker();
+            showGlobalSearch();
+            setupSearchListeners();
+        } catch (error) {
+            console.error("Fejl:", error);
+            el("todayLine").textContent = "Fejl: Husk at oprette clubs.json filen!";
+        }
     }
 
-    const d = new Date(dp.value + "T12:00:00"); // midday = mere robust omkring sommertid
-    const dayName = weekdayDa(d);
-    el("pickPill").textContent = dayName;
+    // 3. Hjælpefunktioner
+    function toDaDate(d) {
+        return d.toLocaleDateString("da-DK", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
+    }
 
-    showForDay(dayName, el("pickList"), el("pickEmpty"), null);
-  }
+    function weekdayDa(d) {
+        return DAYS[d.getDay()];
+    }
 
-  // Vis både når man trykker "Vis" OG når man vælger dato (iPhone-fix)
-el("btnPick").addEventListener("click", renderPicked);
-dp.addEventListener("change", renderPicked); // iOS fyrer "change" når man er færdig med at vælge
-dp.addEventListener("input", renderPicked);  // nogle browsere bruger "input"
+    function getClubDays(club) {
+        const d = club.days ?? club.day ?? [];
+        return Array.isArray(d) ? d : [String(d)];
+    }
 
-  // Hvis du en dag vil have den auto-opdatere når man vælger dato, så aktiver denne:
-  // dp.addEventListener("change", renderPicked);
-}
+    function renderClub(club) {
+        const box = document.createElement("div");
+        box.className = "club";
 
-initToday();
-initPicker();
+        const name = document.createElement("div");
+        name.className = "name";
+        name.textContent = club.name;
 
-// Opdater "I dag" hvert minut (hvis siden står åben)
-setInterval(initToday, 60 * 1000);
-            
-            if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("./sw.js");
-}
-            const gs = el("globalSearch");
-const gc = el("btnGlobalClear");
+        const addr = document.createElement("a");
+        addr.className = "addr";
+        // Fix: Rettet link til Google Maps
+        addr.href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(club.address);
+        addr.target = "_blank";
+        addr.rel = "noopener noreferrer";
+        addr.textContent = club.address;
 
-if (gs) {
-  gs.addEventListener("input", showGlobalSearch);
-}
+        const tags = document.createElement("div");
+        tags.className = "tags";
 
-if (gc) {
-  gc.addEventListener("click", () => {
-    el("globalSearch").value = "";
-    showGlobalSearch();
-    el("globalSearch").focus();
-  });
-}
+        const dayTag = document.createElement("div");
+        dayTag.className = "tag";
+        dayTag.textContent = getClubDays(club).join(", ");
 
-// Start-tilstand (viser "Skriv noget..." + pill = —)
-showGlobalSearch();
-            
+        const timeTag = document.createElement("div");
+        timeTag.className = "tag orange";
+        timeTag.textContent = club.time;
+
+        tags.appendChild(dayTag);
+        tags.appendChild(timeTag);
+        box.appendChild(name);
+        box.appendChild(addr);
+        box.appendChild(tags);
+
+        return box;
+    }
+
+    function norm(s) {
+        return String(s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    }
+
+    function matchesSearch(club, q) {
+        const hay = norm(`${club.name} ${club.address}`);
+        return hay.includes(q);
+    }
+
+    // 4. Hovedfunktioner
+    function showGlobalSearch() {
+        const input = el("globalSearch");
+        const listEl = el("globalList");
+        const emptyEl = el("globalEmpty");
+        const pill = el("searchPill");
+
+        if (!input || !listEl || !emptyEl || !pill) return;
+
+        const q = norm(input.value);
+        listEl.innerHTML = "";
+
+        if (!q) {
+            pill.textContent = "—";
+            emptyEl.style.display = "block";
+            emptyEl.textContent = "Skriv noget i søgefeltet…";
+            return;
+        }
+
+        const matches = CLUBS
+            .filter(club => matchesSearch(club, q))
+            .sort((a, b) => (a.name || "").localeCompare(b.name || "", "da"));
+
+        pill.textContent = `${matches.length} match`;
+
+        if (matches.length === 0) {
+            emptyEl.style.display = "block";
+            emptyEl.textContent = "Ingen match.";
+            return;
+        }
+
+        emptyEl.style.display = "none";
+        for (const club of matches) {
+            listEl.appendChild(renderClub(club));
+        }
+    }
+
+    function showForDay(dayName, listEl, emptyEl, descEl) {
+        listEl.innerHTML = "";
+
+        const matches = CLUBS.filter(club => {
+            const days = getClubDays(club).map(x => String(x).trim());
+            return days.includes(dayName);
+        });
+
+        if (descEl) descEl.textContent = `Klubber med åbent på ${dayName}: ${matches.length}`;
+
+        if (matches.length === 0) {
+            emptyEl.style.display = "block";
+            return;
+        }
+        emptyEl.style.display = "none";
+
+        matches.sort((a, b) => (a.time || "").localeCompare(b.time || "", "da"));
+
+        for (const club of matches) {
+            listEl.appendChild(renderClub(club));
+        }
+    }
+
+    function initToday() {
+        const now = new Date();
+        const dayName = weekdayDa(now);
+        el("todayLine").textContent = `I dag er det ${toDaDate(now)}.`;
+        el("todayPill").textContent = dayName;
+        showForDay(dayName, el("todayList"), el("todayEmpty"), el("todayDesc"));
+    }
+
+    function initPicker() {
+        const dp = el("datePick");
+        dp.value = "";
+        el("pickPill").textContent = "—";
+        el("pickList").innerHTML = "";
+        el("pickEmpty").style.display = "block";
+
+        function renderPicked() {
+            if (!dp.value) return;
+            const d = new Date(dp.value + "T12:00:00");
+            const dayName = weekdayDa(d);
+            el("pickPill").textContent = dayName;
+            showForDay(dayName, el("pickList"), el("pickEmpty"), null);
+        }
+
+        el("btnPick").addEventListener("click", renderPicked);
+        dp.addEventListener("change", renderPicked);
+    }
+
+    function setupSearchListeners() {
+        const gs = el("globalSearch");
+        const gc = el("btnGlobalClear");
+
+        if (gs) gs.addEventListener("input", showGlobalSearch);
+        if (gc) {
+            gc.addEventListener("click", () => {
+                gs.value = "";
+                showGlobalSearch();
+                gs.focus();
+            });
+        }
+    }
+
+    // 5. Kør det hele
+    loadData();
+
+    // Service Worker
+    if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("./sw.js");
+    }
+
+    // Opdater hvert minut
+    setInterval(() => {
+        if (CLUBS.length > 0) initToday();
+    }, 60000);
+
 })();
 </script>
 </body>
 </html>
+
 
 
 
