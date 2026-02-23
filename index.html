@@ -459,47 +459,45 @@ function renderClub(club) {
   tags.appendChild(dayTag);
   tags.appendChild(timeTag);
 
-  if (club.note) {
-    const noteTag = document.createElement("div");
-    noteTag.className = "tag";
-    noteTag.textContent = club.note;
-    tags.appendChild(noteTag);
-  }
+// ✅ Note-tag (fx "Sidste fredag")
+if (club.note) {
+  const noteTag = document.createElement("div");
+  noteTag.className = "tag";
+  noteTag.textContent = club.note;
+  tags.appendChild(noteTag);
+}
 
-  if (club.parity) {
-    const p = String(club.parity).toLowerCase();
-    const parityTag = document.createElement("div");
-    parityTag.className = "tag";
-    parityTag.textContent =
-      (p === "even") ? "LIGE UGER" :
-      (p === "odd") ? "ULIGE UGER" :
-      club.parity;
-    tags.appendChild(parityTag);
-  }
+// ✅ Lige/ulige uger tag (valgfrit)
+if (club.parity) {
+  const p = String(club.parity).toLowerCase();
+  const parityTag = document.createElement("div");
+  parityTag.className = "tag";
+  parityTag.textContent =
+    (p === "even") ? "LIGE UGER" :
+    (p === "odd") ? "ULIGE UGER" :
+    club.parity;
+  tags.appendChild(parityTag);
+}
 
-  // ✅ DEL-knap
-  const actions = document.createElement("div");
-  actions.className = "row";
+/* ✅ INDSÆT DEL-KNAP HER (før box.appendChild...) */
+const shareBtn = document.createElement("button");
+shareBtn.className = "shareBtn tag";
+shareBtn.type = "button";
+shareBtn.textContent = "Del";
 
-  const shareBtn = document.createElement("button");
-  shareBtn.className = "shareBtn";
-  shareBtn.type = "button";
-  shareBtn.textContent = "Del";
+shareBtn.dataset.name = club.name || "";
+shareBtn.dataset.address = club.address || "";
+shareBtn.dataset.time = club.time || "";
+shareBtn.dataset.days = getClubDays(club).join(", ");
 
-  // Gem info på knappen (dataset)
-  shareBtn.dataset.name = club.name || "";
-  shareBtn.dataset.address = club.address || "";
-  shareBtn.dataset.time = club.time || "";
-  shareBtn.dataset.days = getClubDays(club).join(", ");
+tags.appendChild(shareBtn);
 
-  actions.appendChild(shareBtn);
+/* resten er som før */
+box.appendChild(name);
+box.appendChild(addr);
+box.appendChild(tags);
 
-  box.appendChild(name);
-  box.appendChild(addr);
-  box.appendChild(tags);
-  box.appendChild(actions);
-
-  return box;
+return box;
 }
 
     function norm(s) {
@@ -795,6 +793,7 @@ Kort: ${mapsUrl}`;
 </script>
 </body>
 </html>
+
 
 
 
