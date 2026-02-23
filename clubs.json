@@ -28,7 +28,6 @@
     "address": "Hedeager 6, 2605 Brøndby",
     "days": ["Onsdag"],
     "time": "17:00",
-    "parity": "even"
   },
   {
     "name": "MC71",
@@ -155,11 +154,10 @@
     "address": "Ørstedvej 54, 4130 Viby Sjælland",
     "days": ["Torsdag"],
     "time": "19:00",
-    "parity": "odd"
   },
   {
     "name": "WILD DEMONS MC",
-    "address": "Beldringevej 203, 5270 Odense N",
+    "address": "Ørstedvej 54, 4130 Viby Sjælland",
     "days": ["Tirsdag"],
     "time": "19:00"
   },
@@ -174,7 +172,7 @@
     "address": "Hestehavebakken 96, 4400 Kalundborg",
     "days": ["Onsdag", "Fredag"],
     "time": "19:00",
-    "note": "Sidste fredag"
+    "note": "Sidste Fredag"
   },
   {
     "name": "LA FUTURA MC",
@@ -217,14 +215,13 @@
     "address": "Dalbyvej 90, 8722 Hedensted",
     "days": ["Fredag"],
     "time": "17:30",
-    "note": "Sidste fredag"
+    "note": "Sidste Fredag"
   },
   {
     "name": "POW MIA EAGLES MC",
     "address": "Møllerisvej 3, 3320 Skævinge",
     "days": ["Fredag"],
     "time": "17:00",
-    "parity": "odd"
   },
   {
     "name": "WHY NOT MC",
