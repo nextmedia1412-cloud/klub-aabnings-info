@@ -236,6 +236,77 @@
             background: rgba(255,255,255,.06);
             border: 1px solid rgba(255,255,255,.10);
         }
+        /* ===== Add Club modal ===== */
+.hidden { display: none !important; }
+
+.modal{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 9999;
+}
+
+.modalBox{
+  width: min(560px, 100%);
+  max-height: calc(100vh - 32px);
+  overflow: auto;
+  border-radius: 14px;
+  padding: 14px;
+  background: rgba(18,18,18,.96);
+  border: 1px solid rgba(255,255,255,.10);
+  box-shadow: 0 18px 55px rgba(0,0,0,.6);
+}
+
+.modalHeader{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.modalHeader h2{
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+#closeAddClub{
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.08);
+}
+
+#closeAddClub:hover{
+  background: rgba(255,255,255,.12);
+}
+
+/* Inputs/textarea kun inde i modal (så vi ikke ændrer resten af siden) */
+.modalBody input,
+.modalBody textarea{
+  width: 100%;
+  margin: 6px 0;
+}
+
+.modalBody textarea{
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* Floating “+ Tilføj klub” knap */
+#openAddClub{
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 9000;
+  border-radius: 999px;
+  padding: 12px 16px;
+  box-shadow: 0 12px 35px rgba(0,0,0,.35);
+  backdrop-filter: blur(8px);
+}
     </style>
 </head>
 
@@ -258,7 +329,7 @@
   <h2>Søg klub <span class="pill" id="searchPill">—</span></h2>
 
   <div class="row">
-    <input id="globalSearch" type="search" placeholder="Søg efter navn eller adresse />
+    <input id="globalSearch" type="search" placeholder="Søg efter navn eller adresse" />
     <button id="btnGlobalClear" type="button">Ryd</button>
   </div>
 
@@ -291,6 +362,33 @@
             </section>
         </div>
     </main>
+    <button id="openAddClub" type="button">+ Tilføj klub</button>
+
+<div id="addClubModal" class="modal hidden" aria-hidden="true">
+  <div class="modalBox">
+    <div class="modalHeader">
+      <h2>Tilføj klub</h2>
+      <button id="closeAddClub" type="button" aria-label="Luk">✕</button>
+    </div>
+
+    <div class="modalBody">
+      <input id="acName" placeholder="Klubnavn" />
+      <input id="acAddress" placeholder="Adresse" />
+      <input id="acDays" placeholder="Dage (komma) fx Onsdag,Fredag" />
+      <input id="acTime" placeholder="Tid fx 17:00" />
+
+      <textarea id="acPreview" rows="8" readonly placeholder="Preview kommer her..."></textarea>
+
+      <div class="row">
+        <button id="acGenerate" type="button">Generér</button>
+        <button id="acCopy" type="button">Kopiér</button>
+        <button id="acMail" type="button">Send mail</button>
+      </div>
+
+      <p id="acNote" class="muted"></p>
+    </div>
+  </div>
+</div>
 
     <script>
 (() => {
@@ -517,6 +615,7 @@ box.appendChild(tags);
 </script>
 </body>
 </html>
+
 
 
 
