@@ -684,7 +684,12 @@ function generateClubSnippet() {
   const clubObj = { name, address, days, time };
 
   // Snippet som du kan indsætte som et element i arrayet i clubs.json
-  const snippet = JSON.stringify(clubObj, null, 2) + ",";
+  const pretty = JSON.stringify(clubObj, null, 2);
+const compactDays = pretty.replace(
+  /"days": \[\s*([\s\S]*?)\s*\]/,
+  (m, inner) => `"days": [${inner.replace(/\s+/g, " ").trim()}]`
+);
+const snippet = compactDays + ",";
 
   acPreview.value = snippet;
   acNote.textContent = "Genereret ✅";
@@ -741,6 +746,7 @@ Mvh`;
 </script>
 </body>
 </html>
+
 
 
 
