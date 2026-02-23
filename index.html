@@ -323,6 +323,98 @@
 .tags{
   align-items: center;
 }
+/* === Next Level micro-animations (fast & smooth) === */
+
+/* Respekt for folk der hader motion + svage devices */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+/* 1) Cards: subtle hover lift */
+.card{
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+  will-change: transform;
+}
+.card:hover{
+  transform: translateY(-2px);
+  border-color: rgba(255,106,0,.28);
+  box-shadow: 0 16px 38px rgba(0,0,0,.42);
+}
+
+/* 2) Club items: hover glide */
+.club{
+  transition: transform 140ms ease, border-color 140ms ease;
+  will-change: transform;
+}
+.club:hover{
+  transform: translateY(-1px);
+  border-color: rgba(255,255,255,.14);
+}
+
+/* 3) Buttons: premium press */
+button{
+  transition: transform 90ms ease, filter 120ms ease;
+  will-change: transform;
+}
+button:hover{
+  filter: brightness(1.06);
+}
+button:active{
+  transform: translateY(1px) scale(.99);
+}
+
+/* 4) Tags: tiny hover */
+.tag{
+  transition: transform 120ms ease, border-color 140ms ease;
+  will-change: transform;
+}
+.tag:hover{
+  transform: translateY(-1px);
+  border-color: rgba(255,106,0,.25);
+}
+
+/* 5) Modal: pop in (cheap) */
+.modal{
+  opacity: 1;
+  transition: opacity 140ms ease;
+}
+.modal.hidden{
+  opacity: 0;
+  pointer-events: none;
+}
+.modalBox{
+  transform: translateY(10px) scale(.985);
+  opacity: 0;
+  transition: transform 180ms cubic-bezier(.2,.9,.2,1), opacity 160ms ease;
+  will-change: transform, opacity;
+}
+/* når modal er synlig (ikke hidden) */
+.modal:not(.hidden) .modalBox{
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+/* 6) Next Level glow accent (subtle) */
+.modalBox{
+  box-shadow:
+    0 18px 55px rgba(0,0,0,.60),
+    0 0 0 1px rgba(255,106,0,.10),
+    0 0 30px rgba(255,106,0,.10);
+}
+
+/* 7) Floating add button: breathe (very subtle) */
+#openAddClub{
+  animation: breathe 2.8s ease-in-out infinite;
+  will-change: transform;
+}
+@keyframes breathe{
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  #openAddClub { animation: none !important; }
+}
+        
     </style>
 </head>
 
@@ -809,6 +901,7 @@ Kort: ${mapsUrl}`;
 </script>
 </body>
 </html>
+
 
 
 
