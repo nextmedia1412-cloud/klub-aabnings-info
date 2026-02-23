@@ -258,11 +258,11 @@
   <h2>Søg klub <span class="pill" id="searchPill">—</span></h2>
 
   <div class="row">
-    <input id="globalSearch" type="search" placeholder="Søg f.eks. The Others MC / by / adresse…" />
+    <input id="globalSearch" type="search" placeholder="Søg efter navn eller adresse />
     <button id="btnGlobalClear" type="button">Ryd</button>
   </div>
 
-  <div class="hint">Søger i alle klubber (navn + adresse) og viser match med åbningstider.</div>
+  <div class="hint">Søger i alle klubber</div>
 
   <div class="divider"></div>
   <div class="list" id="globalList"></div>
@@ -314,7 +314,7 @@
             setupSearchListeners();
         } catch (error) {
             console.error("Fejl:", error);
-            el("todayLine").textContent = "Fejl: Husk at oprette clubs.json filen!";
+            el("todayLine").textContent = "Fejl: Tjek clubs.json";
         }
     }
 
@@ -517,6 +517,7 @@ box.appendChild(tags);
 </script>
 </body>
 </html>
+
 
 
 
