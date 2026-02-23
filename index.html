@@ -430,62 +430,77 @@
         return Array.isArray(d) ? d : [String(d)];
     }
 
-    function renderClub(club) {
-        const box = document.createElement("div");
-        box.className = "club";
+function renderClub(club) {
+  const box = document.createElement("div");
+  box.className = "club";
 
-        const name = document.createElement("div");
-        name.className = "name";
-        name.textContent = club.name;
+  const name = document.createElement("div");
+  name.className = "name";
+  name.textContent = club.name;
 
-        const addr = document.createElement("a");
-        addr.className = "addr";
-        // Fix: Rettet link til Google Maps
-        addr.href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(club.address);
-        addr.target = "_blank";
-        addr.rel = "noopener noreferrer";
-        addr.textContent = club.address;
+  const addr = document.createElement("a");
+  addr.className = "addr";
+  addr.href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(club.address);
+  addr.target = "_blank";
+  addr.rel = "noopener noreferrer";
+  addr.textContent = club.address;
 
-        const tags = document.createElement("div");
-        tags.className = "tags";
+  const tags = document.createElement("div");
+  tags.className = "tags";
 
-const dayTag = document.createElement("div");
-dayTag.className = "tag";
-dayTag.textContent = getClubDays(club).join(", ");
+  const dayTag = document.createElement("div");
+  dayTag.className = "tag";
+  dayTag.textContent = getClubDays(club).join(", ");
 
-const timeTag = document.createElement("div");
-timeTag.className = "tag orange";
-timeTag.textContent = club.time;
+  const timeTag = document.createElement("div");
+  timeTag.className = "tag orange";
+  timeTag.textContent = club.time;
 
-tags.appendChild(dayTag);
-tags.appendChild(timeTag);
+  tags.appendChild(dayTag);
+  tags.appendChild(timeTag);
 
-// ✅ Note-tag (fx "Sidste fredag")
-if (club.note) {
-  const noteTag = document.createElement("div");
-  noteTag.className = "tag"; // vil du have den orange: "tag orange"
-  noteTag.textContent = club.note;
-  tags.appendChild(noteTag);
+  if (club.note) {
+    const noteTag = document.createElement("div");
+    noteTag.className = "tag";
+    noteTag.textContent = club.note;
+    tags.appendChild(noteTag);
+  }
+
+  if (club.parity) {
+    const p = String(club.parity).toLowerCase();
+    const parityTag = document.createElement("div");
+    parityTag.className = "tag";
+    parityTag.textContent =
+      (p === "even") ? "LIGE UGER" :
+      (p === "odd") ? "ULIGE UGER" :
+      club.parity;
+    tags.appendChild(parityTag);
+  }
+
+  // ✅ DEL-knap
+  const actions = document.createElement("div");
+  actions.className = "row";
+
+  const shareBtn = document.createElement("button");
+  shareBtn.className = "shareBtn";
+  shareBtn.type = "button";
+  shareBtn.textContent = "Del";
+
+  // Gem info på knappen (dataset)
+  shareBtn.dataset.name = club.name || "";
+  shareBtn.dataset.address = club.address || "";
+  shareBtn.dataset.time = club.time || "";
+  shareBtn.dataset.days = getClubDays(club).join(", ");
+
+  actions.appendChild(shareBtn);
+
+  box.appendChild(name);
+  box.appendChild(addr);
+  box.appendChild(tags);
+  box.appendChild(actions);
+
+  return box;
 }
-
-// ✅ Lige/ulige uger tag (valgfrit)
-if (club.parity) {
-  const p = String(club.parity).toLowerCase();
-  const parityTag = document.createElement("div");
-  parityTag.className = "tag";
-  parityTag.textContent =
-    (p === "even") ? "LIGE UGER" :
-    (p === "odd") ? "ULIGE UGER" :
-    club.parity;
-  tags.appendChild(parityTag);
-}
-
-box.appendChild(name);
-box.appendChild(addr);
-box.appendChild(tags);
-
-        return box;
-    }
 
     function norm(s) {
         return String(s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -727,6 +742,40 @@ Mvh`;
   const mailto = `mailto:${encodeURIComponent(DEST_EMAIL)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   window.location.href = mailto;
     });
+    document.addEventListener("click", async (e) => {
+  const btn = e.target.closest(".shareBtn");
+  if (!btn) return;
+
+  const name = btn.dataset.name || "";
+  const address = btn.dataset.address || "";
+  const time = btn.dataset.time || "";
+  const days = btn.dataset.days || "";
+
+  const mapsUrl = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(address);
+
+  const text =
+`${name}
+${address}
+Åbent: ${days} kl. ${time}
+Kort: ${mapsUrl}`;
+
+  if (navigator.share) {
+    try {
+      await navigator.share({ title: name, text });
+      return;
+    } catch {
+      // Brugeren kan have annulleret — fint nok
+    }
+  }
+
+  // fallback: copy
+  try {
+    await navigator.clipboard.writeText(text);
+    alert("Kopieret til udklipsholder ✅");
+  } catch {
+    prompt("Kopiér teksten her:", text);
+  }
+});
 
     
     // 5. Kør det hele
@@ -746,6 +795,7 @@ Mvh`;
 </script>
 </body>
 </html>
+
 
 
 
