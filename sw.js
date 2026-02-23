@@ -1,7 +1,8 @@
-const CACHE = "klubinfo-v4";
+const CACHE = "klubinfo-v5"; // <-- bump version når du ændrer filer
 const ASSETS = [
   "./",
   "./index.html",
+  "./clubs.json",
   "./manifest.webmanifest",
   "./icon-192.png",
   "./icon-512.png",
@@ -26,8 +27,14 @@ self.addEventListener("activate", (e) => {
 self.addEventListener("fetch", (e) => {
   const url = new URL(e.request.url);
 
-  // HTML/navigation: Network-first (så dine ændringer i index.html kommer automatisk)
-  if (e.request.mode === "navigate" || url.pathname.endsWith("/index.html")) {
+  const isHTML =
+    e.request.mode === "navigate" ||
+    url.pathname.endsWith("/index.html");
+
+  const isData = url.pathname.endsWith("/clubs.json");
+
+  // HTML + clubs.json: Network-first (auto-opdater), fallback til cache (offline)
+  if (isHTML || isData) {
     e.respondWith(
       fetch(e.request)
         .then((res) => {
@@ -35,14 +42,12 @@ self.addEventListener("fetch", (e) => {
           caches.open(CACHE).then((c) => c.put(e.request, copy));
           return res;
         })
-        .catch(() =>
-          caches.match(e.request).then((r) => r || caches.match("./"))
-        )
+        .catch(() => caches.match(e.request).then((r) => r || caches.match("./")))
     );
     return;
   }
 
-  // Alt andet (ikoner/manifest/logo): Cache-first
+  // Alt andet: Cache-first
   e.respondWith(
     caches.match(e.request).then((res) => res || fetch(e.request))
   );
