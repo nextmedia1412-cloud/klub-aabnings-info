@@ -307,6 +307,22 @@
   box-shadow: 0 12px 35px rgba(0,0,0,.35);
   backdrop-filter: blur(8px);
 }
+        /* Share-knap skal ligne et tag og ikke en stor button */
+.shareBtn{
+  /* Neutraliser din globale button-style */
+  padding: 5px 9px;             /* samme som .tag */
+  font-size: 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.03);
+  color: rgba(255,255,255,.88);
+  box-shadow: none;
+}
+
+/* Hold den på linje med tags */
+.tags{
+  align-items: center;
+}
     </style>
 </head>
 
@@ -793,6 +809,7 @@ Kort: ${mapsUrl}`;
 </script>
 </body>
 </html>
+
 
 
 
