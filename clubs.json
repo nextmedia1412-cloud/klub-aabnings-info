@@ -27,7 +27,7 @@
     "name": "RTH RIDERS MC",
     "address": "Hedeager 6, 2605 Brøndby",
     "days": ["Onsdag"],
-    "time": "17:00",
+    "time": "17:00"
   },
   {
     "name": "MC71",
@@ -153,7 +153,7 @@
     "name": "FALCON´S MC",
     "address": "Ørstedvej 54, 4130 Viby Sjælland",
     "days": ["Torsdag"],
-    "time": "19:00",
+    "time": "19:00"
   },
   {
     "name": "WILD DEMONS MC",
@@ -221,7 +221,7 @@
     "name": "POW MIA EAGLES MC",
     "address": "Møllerisvej 3, 3320 Skævinge",
     "days": ["Fredag"],
-    "time": "17:00",
+    "time": "17:00"
   },
   {
     "name": "WHY NOT MC",
