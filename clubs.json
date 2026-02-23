@@ -241,4 +241,10 @@
     "days": ["Tirsdag"],
     "time": "18:00"
   }
+  {
+  "name": "Next Level MC",
+  "address": "Nykøbingvej 188, 4571 Grevinge",
+  "days": ["Onsdag"],
+  "time": "18:00"
+}
 ]
