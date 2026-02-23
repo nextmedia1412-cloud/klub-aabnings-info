@@ -598,6 +598,132 @@ box.appendChild(tags);
         }
     }
 
+    // ===== Add Club modal + mail =====
+const DEST_EMAIL = "nextmedia1412@gmail.com"; // <-- skriv din mail her
+
+const openBtn = document.getElementById("openAddClub");
+const modal = document.getElementById("addClubModal");
+const closeBtn = document.getElementById("closeAddClub");
+    if (!openBtn || !modal || !closeBtn) {
+  console.error("Modal IDs matcher ikke", { openBtn, modal, closeBtn });
+  // Stop resten så du ikke får 20 andre fejl bagefter
+  return;
+}
+
+const acName = document.getElementById("acName");
+const acAddress = document.getElementById("acAddress");
+const acDays = document.getElementById("acDays");
+const acTime = document.getElementById("acTime");
+const acPreview = document.getElementById("acPreview");
+const acNote = document.getElementById("acNote");
+
+const acGenerate = document.getElementById("acGenerate");
+const acCopy = document.getElementById("acCopy");
+const acMail = document.getElementById("acMail");
+
+function openModal() {
+  modal.classList.remove("hidden");
+  modal.setAttribute("aria-hidden", "false");
+  acNote.textContent = "";
+}
+
+function closeModal() {
+  modal.classList.add("hidden");
+  modal.setAttribute("aria-hidden", "true");
+}
+
+openBtn.addEventListener("click", openModal);
+closeBtn.addEventListener("click", closeModal);
+
+// klik på mørk baggrund lukker
+modal.addEventListener("click", (e) => {
+  if (e.target === modal) closeModal();
+});
+
+// ESC lukker
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && !modal.classList.contains("hidden")) closeModal();
+});
+
+function normalizeDays(input) {
+  return input
+    .split(",")
+    .map(s => s.trim())
+    .filter(Boolean)
+    .map(s => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase());
+}
+
+function isValidTimeHHMM(t) {
+  return /^([01]\d|2[0-3]):[0-5]\d$/.test(t);
+}
+
+function generateClubSnippet() {
+  const name = acName.value.trim();
+  const address = acAddress.value.trim();
+  const daysRaw = acDays.value.trim();
+  const time = acTime.value.trim();
+
+  acNote.textContent = "";
+  acPreview.value = "";
+
+  if (!name || !address || !daysRaw || !time) {
+    acNote.textContent = "Udfyld alle felter.";
+    return null;
+  }
+  if (!isValidTimeHHMM(time)) {
+    acNote.textContent = "Tid skal være HH:MM (fx 17:00).";
+    return null;
+  }
+
+  const days = normalizeDays(daysRaw);
+  if (days.length === 0) {
+    acNote.textContent = "Skriv mindst én dag.";
+    return null;
+  }
+
+  const clubObj = { name, address, days, time };
+
+  // Snippet som du kan indsætte som et element i arrayet i clubs.json
+  const snippet = JSON.stringify(clubObj, null, 2) + ",";
+
+  acPreview.value = snippet;
+  acNote.textContent = "Genereret ✅";
+  return snippet;
+}
+
+acGenerate.addEventListener("click", generateClubSnippet);
+
+acCopy.addEventListener("click", async () => {
+  const snippet = acPreview.value || generateClubSnippet();
+  if (!snippet) return;
+
+  try {
+    await navigator.clipboard.writeText(snippet);
+    acNote.textContent = "Kopieret ✅";
+  } catch {
+    acNote.textContent = "Kunne ikke kopiere automatisk. Markér teksten og kopier manuelt.";
+  }
+});
+
+acMail.addEventListener("click", () => {
+  const snippet = acPreview.value || generateClubSnippet();
+  if (!snippet) return;
+
+  const subject = `Ny klub til clubs.json: ${acName.value.trim()}`;
+  const body =
+`Hej,
+
+Her er en ny klub til clubs.json (indsæt som nyt element i arrayet):
+
+${snippet}
+
+Mvh`;
+
+  const mailto = `mailto:${encodeURIComponent(DEST_EMAIL)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  window.location.href = mailto;
+    });
+
+    
     // 5. Kør det hele
     loadData();
 
@@ -615,6 +741,7 @@ box.appendChild(tags);
 </script>
 </body>
 </html>
+
 
 
 
