@@ -351,19 +351,40 @@
         const tags = document.createElement("div");
         tags.className = "tags";
 
-        const dayTag = document.createElement("div");
-        dayTag.className = "tag";
-        dayTag.textContent = getClubDays(club).join(", ");
+const dayTag = document.createElement("div");
+dayTag.className = "tag";
+dayTag.textContent = getClubDays(club).join(", ");
 
-        const timeTag = document.createElement("div");
-        timeTag.className = "tag orange";
-        timeTag.textContent = club.time;
+const timeTag = document.createElement("div");
+timeTag.className = "tag orange";
+timeTag.textContent = club.time;
 
-        tags.appendChild(dayTag);
-        tags.appendChild(timeTag);
-        box.appendChild(name);
-        box.appendChild(addr);
-        box.appendChild(tags);
+tags.appendChild(dayTag);
+tags.appendChild(timeTag);
+
+// ✅ Note-tag (fx "Sidste fredag")
+if (club.note) {
+  const noteTag = document.createElement("div");
+  noteTag.className = "tag"; // vil du have den orange: "tag orange"
+  noteTag.textContent = club.note;
+  tags.appendChild(noteTag);
+}
+
+// ✅ Lige/ulige uger tag (valgfrit)
+if (club.parity) {
+  const p = String(club.parity).toLowerCase();
+  const parityTag = document.createElement("div");
+  parityTag.className = "tag";
+  parityTag.textContent =
+    (p === "even") ? "LIGE UGER" :
+    (p === "odd") ? "ULIGE UGER" :
+    club.parity;
+  tags.appendChild(parityTag);
+}
+
+box.appendChild(name);
+box.appendChild(addr);
+box.appendChild(tags);
 
         return box;
     }
@@ -496,6 +517,7 @@
 </script>
 </body>
 </html>
+
 
 
 
