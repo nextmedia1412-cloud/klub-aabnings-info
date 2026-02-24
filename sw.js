@@ -1,4 +1,4 @@
-const CACHE = "klubinfo-v6"; // <-- bump version når du ændrer filer
+const CACHE = "klubinfo-v7"; // <-- bump version når du ændrer filer
 const ASSETS = [
   "./",
   "./index.html",
