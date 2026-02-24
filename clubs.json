@@ -115,7 +115,9 @@
     "name": "STENLØSE MC",
     "address": "Gymnasievej 3, 3660 Stenløse",
     "days": ["Onsdag"],
-    "time": "19:00"
+    "time": "19:00",
+    "lat" : 55.77476860180541,
+    "lng" : 12.195958582993859
   },
   {
     "name": "MORGENHÅR MC",
@@ -349,7 +351,9 @@
     "name": "Blue Wings MC",
     "address": "Aalborgvej 22, 8620 kjellerup",
     "days": ["Onsdag"],
-    "time": "18:30"
+    "time": "18:30",
+    "lat" : 56.266724524011636,
+    "lng" : 9.319871754175074
   },
   {
     "name": "North Riders Mc",
