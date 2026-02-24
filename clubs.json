@@ -242,6 +242,51 @@
     "time": "18:00"
   },
   {
+    "name": "PRIMUS MOTOR MC",
+    "address": "Roskildevej 7A, 2680 Solrød",
+    "days": ["Onsdag"],
+    "time": "18:00"
+    "note": "Ulige uger"
+  },
+  {
+    "name": "Knucklemen",
+    "address": "Greve bygade 28B, 2670 Greve",
+    "days": ["Onsdag"],
+    "time": "18:00"
+    "note": "Lige uger"
+  },
+  {
+    "name": "LIBERTARIANS MC",
+    "address": "Butterupvej 78, 4420 Regstrup",
+    "days": ["Torsdag"],
+    "time": "18:30"
+  },
+  {
+    "name": "Blue Wings MC",
+    "address": "Aalborgvej 22, 8620 kjellerup",
+    "days": ["Onsdag"],
+    "time": "18:30"
+  },
+  {
+    "name": "North Riders Mc",
+    "address": "Hedeager 6, 2605 Brøndby",
+    "days": ["Onsdag"],
+    "time": "17:00"
+    "note": "Lige uger"
+  },
+  {
+    "name": "DESPERADOS MC",
+    "address": "Høm møllevej 12, 4100 Ringsted",
+    "days": ["Tirsdag"],
+    "time": "19:00"
+  },
+  {
+    "name": "GOD's BUSY MC",
+    "address": "Nybyvej 17, 4060 Vipperød",
+    "days": ["Fredag"],
+    "time": "18:00"
+  },
+  {
   "name": "Next Level MC",
   "address": "Nykøbingvej 188, 4571 Grevinge",
   "days": ["Onsdag"],
