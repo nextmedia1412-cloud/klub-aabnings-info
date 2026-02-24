@@ -644,6 +644,13 @@ function renderClub(club) {
   tags.appendChild(dayTag);
   tags.appendChild(timeTag);
 
+    if (typeof club._km === "number") {
+  const distTag = document.createElement("div");
+  distTag.className = "tag";
+  distTag.textContent = club._km < 10 ? `${club._km.toFixed(1)} km` : `${club._km.toFixed(0)} km`;
+  tags.appendChild(distTag);
+}
+
 // ✅ Note-tag (fx "Sidste fredag")
 if (club.note) {
   const noteTag = document.createElement("div");
@@ -983,6 +990,7 @@ Kort: ${mapsUrl}`;
 </script>
 </body>
 </html>
+
 
 
 
