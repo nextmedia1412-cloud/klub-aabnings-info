@@ -514,7 +514,7 @@ button:active{
             CLUBS = await response.json();
             
             // Først når data er hentet, starter vi visningen
-            initToday();
+            await initToday();
             initPicker();
             showGlobalSearch();
             setupSearchListeners();
@@ -522,8 +522,85 @@ button:active{
             console.error("Fejl:", error);
             el("todayLine").textContent = "Fejl: Tjek clubs.json";
         }
+
+        
+    }
+// ===== GPS / afstand (skal ligge i top-scope, ikke inde i loadData) =====
+let USER_LOC = null;
+
+function haversineKm(aLat, aLng, bLat, bLng) {
+  const R = 6371;
+  const toRad = (x) => x * Math.PI / 180;
+  const dLat = toRad(bLat - aLat);
+  const dLng = toRad(bLng - aLng);
+  const lat1 = toRad(aLat);
+  const lat2 = toRad(bLat);
+
+  const s =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(lat1) * Math.cos(lat2) * (Math.sin(dLng / 2) ** 2);
+
+  return 2 * R * Math.asin(Math.min(1, Math.sqrt(s)));
+}
+
+function getUserLocationOnce() {
+  // cache i sessionStorage så du ikke bliver spurgt hele tiden
+  if (USER_LOC) return Promise.resolve(USER_LOC);
+
+  const cached = sessionStorage.getItem("userLoc");
+  if (cached) {
+    try {
+      USER_LOC = JSON.parse(cached);
+      return Promise.resolve(USER_LOC);
+    } catch {}
+  }
+
+  return new Promise((resolve, reject) => {
+    if (!navigator.geolocation) return reject(new Error("Geolocation ikke understøttet"));
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        USER_LOC = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+        sessionStorage.setItem("userLoc", JSON.stringify(USER_LOC));
+        resolve(USER_LOC);
+      },
+      (err) => reject(err),
+      { enableHighAccuracy: true, timeout: 8000, maximumAge: 120000 }
+    );
+  });
+}
+
+async function sortByDistanceIfPossible(list) {
+  try {
+    const user = await getUserLocationOnce();
+
+    // stabil sort for dem uden coords
+    const withIndex = list.map((c, i) => ({ c, i }));
+
+    for (const item of withIndex) {
+      const c = item.c;
+      if (typeof c.lat === "number" && typeof c.lng === "number") {
+        c._km = haversineKm(user.lat, user.lng, c.lat, c.lng);
+      } else {
+        c._km = null;
+      }
     }
 
+    withIndex.sort((a, b) => {
+      const ak = a.c._km, bk = b.c._km;
+      const aHas = typeof ak === "number";
+      const bHas = typeof bk === "number";
+
+      if (aHas && bHas) return ak - bk;       // nærmest først
+      if (aHas && !bHas) return -1;           // med coords før uden
+      if (!aHas && bHas) return 1;
+      return a.i - b.i;                        // begge uden coords: behold rækkefølge
+    });
+
+    return withIndex.map(x => x.c);
+  } catch {
+    return list; // GPS nægtet/timeout → ingen ændring
+  }
+}
     // 3. Hjælpefunktioner
     function toDaDate(d) {
         return d.toLocaleDateString("da-DK", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
@@ -654,35 +731,40 @@ return box;
         }
     }
 
-    function showForDay(dayName, listEl, emptyEl, descEl) {
-        listEl.innerHTML = "";
+    async function showForDay(dayName, listEl, emptyEl, descEl) {
+  listEl.innerHTML = "";
 
-        const matches = CLUBS.filter(club => {
-            const days = getClubDays(club).map(x => String(x).trim());
-            return days.includes(dayName);
-        });
+  const matches = CLUBS.filter(club => {
+    const days = getClubDays(club).map(x => String(x).trim());
+    return days.includes(dayName);
+  });
 
-        if (descEl) descEl.textContent = `Klubber med åbent på ${dayName}: ${matches.length}`;
+  if (descEl) descEl.textContent = `Klubber med åbent på ${dayName}: ${matches.length}`;
 
-        if (matches.length === 0) {
-            emptyEl.style.display = "block";
-            return;
-        }
-        emptyEl.style.display = "none";
+  if (matches.length === 0) {
+    emptyEl.style.display = "block";
+    return;
+  }
+  emptyEl.style.display = "none";
 
-        matches.sort((a, b) => (a.time || "").localeCompare(b.time || "", "da"));
+  // baseline tid-sort
+  matches.sort((a, b) => (a.time || "").localeCompare(b.time || "", "da"));
 
-        for (const club of matches) {
-            listEl.appendChild(renderClub(club));
-        }
-    }
+  // distance-sort ovenpå (bevarer rækkefølge for dem uden coords)
+  const sorted = await sortByDistanceIfPossible(matches);
 
-    function initToday() {
+  // render én gang
+  for (const club of sorted) {
+    listEl.appendChild(renderClub(club));
+  }
+}
+
+    async function initToday() {
         const now = new Date();
         const dayName = weekdayDa(now);
         el("todayLine").textContent = `I dag er det ${toDaDate(now)}.`;
         el("todayPill").textContent = dayName;
-        showForDay(dayName, el("todayList"), el("todayEmpty"), el("todayDesc"));
+        await showForDay(dayName, el("todayList"), el("todayEmpty"), el("todayDesc"));
     }
 
     function initPicker() {
@@ -692,12 +774,12 @@ return box;
         el("pickList").innerHTML = "";
         el("pickEmpty").style.display = "block";
 
-        function renderPicked() {
+        async function renderPicked() {
             if (!dp.value) return;
             const d = new Date(dp.value + "T12:00:00");
             const dayName = weekdayDa(d);
             el("pickPill").textContent = dayName;
-            showForDay(dayName, el("pickList"), el("pickEmpty"), null);
+            await showForDay(dayName, el("pickList"), el("pickEmpty"), null);
         }
 
         el("btnPick").addEventListener("click", renderPicked);
@@ -893,14 +975,15 @@ Kort: ${mapsUrl}`;
     }
 
     // Opdater hvert minut
-    setInterval(() => {
-        if (CLUBS.length > 0) initToday();
-    }, 60000);
+    setInterval(async () => {
+  if (CLUBS.length > 0) await initToday();
+}, 60000);
 
 })();
 </script>
 </body>
 </html>
+
 
 
 
