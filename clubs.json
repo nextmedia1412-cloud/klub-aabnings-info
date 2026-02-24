@@ -19,73 +19,97 @@
     "name": "DESPERADOS MC",
     "address": "Høm møllevej 12, 4100 Ringsted",
     "days": ["Onsdag"],
-    "time": "19:00"
+    "time": "19:00",
+    "lat" : 55.42001207902997,
+    "lng" : 11.781984784833709
   },
   {
     "name": "SONS OF FREEDON MC",
     "address": "Landevejen 8A, 4700 Næstved",
     "days": ["Onsdag", "Fredag"],
-    "time": "19:00"
+    "time": "19:00",
+    "lat" : 55.165011670972,
+    "lng" : 11.848810082972513
   },
   {
     "name": "RTH RIDERS MC",
     "address": "Hedeager 6, 2605 Brøndby",
     "days": ["Onsdag"],
-    "time": "17:00"
+    "time": "17:00",
+    "lat" : 55.64769153824796, 
+    "lng" : 12.388888111825496
   },
   {
     "name": "MC71",
     "address": "Melbyfemvej 4, 4400 Kalundborg",
     "days": ["Fredag"],
-    "time": "19:00"
+    "time": "19:00",
+    "lat" : 55.64711038982077,
+    "lng" : 11.091631556005566
   },
   {
     "name": "BLACK EAGLES MC",
     "address": "Nykøbingvej 194, 4571 Grevinge",
     "days": ["Tirsdag", "Fredag"],
-    "time": "19:00"
+    "time": "19:00",
+    "lat" : 55.803902981468866,
+    "lng" : 11.598340040667036
   },
   {
     "name": "LAZY BONES MC",
     "address": "KALBYVEJ 32, 4684 Holmegaard",
     "days": ["Fredag"],
-    "time": "19:00"
+    "time": "19:00",
+    "lat" : 55.235980894573046, 
+    "lng" : 11.872376627155285
   },
   {
     "name": "UDBRYDERNE MC",
     "address": "Roskildevej 291, 4100 Ringsted",
     "days": ["Fredag"],
-    "time": "20:00"
+    "time": "20:00",
+    "lat" : 55.47141554290013,
+    "lng" : 11.821166527163358
   },
   {
     "name": "GRUMPY OLD MEN MC",
     "address": "Ørnholmvej 2B, 3550 Slangerup",
     "days": ["Torsdag"],
-    "time": "18:00"
+    "time": "18:00",
+    "lat" : 55.863679206654126,
+    "lng" : 12.141344484849173
   },
   {
     "name": "THUNDEROUS MC",
     "address": "Industrivej 35, 4230 Skælskør",
     "days": ["Torsdag"],
-    "time": "17:00"
+    "time": "17:00",
+    "lat" : 55.25364166939632,
+    "lng" : 11.32138554064769
   },
   {
     "name": "MC SNEGLENE",
     "address": "Hedeager 10, 2605 Brøndby",
     "days": ["Fredag"],
-    "time": "19:00"
+    "time": "19:00",
+    "lat" : 55.64723827261953,
+    "lng" : 12.389359856005607
   },
   {
     "name": "LOUD N PROUD MC",
     "address": "Kantatevej 32, 2730 Herlev",
     "days": ["Tirsdag"],
-    "time": "17:30"
+    "time": "17:30",
+    "lat" : 55.71615159125211,
+    "lng" : 12.448646856008065
   },
   {
     "name": "MC HEDEN",
     "address": "Lillemosevej 5, 2640 Hedehusene",
     "days": ["Onsdag"],
-    "time": "19:00"
+    "time": "19:00",
+    "lat" : 55.61123826725617,
+    "lng" : 12.20225385600424
   },
   {
     "name": "STENLØSE MC",
@@ -97,173 +121,229 @@
     "name": "MORGENHÅR MC",
     "address": "Skalbakken 8B, 2720 Vanløse",
     "days": ["Onsdag"],
-    "time": "19:00"
+    "time": "19:00",
+    "lat" : 55.77479273942752,
+    "lng" : 12.195958582993859
   },
   {
     "name": "WARRIORS MC",
     "address": "Brogade 6, 4690 Haslev",
     "days": ["Onsdag"],
-    "time": "19:00"
+    "time": "19:00",
+    "lat" : 55.374457271737086,
+    "lng" : 11.965476369487952
   },
   {
     "name": "IN SAINTZ MC",
     "address": "Klintehøj vænge 21, 3460 Birkerød",
     "days": ["Fredag"],
-    "time": "17:00"
+    "time": "17:00",
+    "lat" : 55.83654640627339,
+    "lng" : 12.408780044372476
   },
   {
     "name": "WASTELAND MC",
     "address": "Udby Kirkevej 13, 4300 Holbæk",
     "days": ["Fredag"],
-    "time": "20:00"
+    "time": "20:00",
+    "lat" : 55.7553663712212,
+    "lng" : 11.707510440665246
   },
   {
     "name": "IRONHEAD MC",
     "address": "Østre Vindingevej 198, 4000 Roskilde",
     "days": ["Tirsdag", "Fredag"],
-    "time": "17:30"
+    "time": "17:30",
+    "lat" : 55.62844597113793,
+    "lng" : 12.141996254152719
   },
   {
     "name": "HOLBÆK MOTORCYKELKLUB",
     "address": "Tuse Skovvej 5, 4300 Holbæk",
     "days": ["Onsdag", "Fredag"],
-    "time": "20:00"
+    "time": "20:00",
+    "lat" : 55.71654861538175,
+    "lng" : 11.630068384844094
   },
   {
     "name": "MC SUSÅ",
     "address": "Lille Englebjergvej 4, 4700 Næstved",
     "days": ["Fredag"],
-    "time": "19:30"
+    "time": "19:30",
+    "lat" : 55.199300665418434,
+    "lng" : 11.764631182973778
   },
   {
     "name": "RIDERS MC",
     "address": "Murervej 9, 4370 Store Merløse",
     "days": ["Fredag"],
-    "time": "19:00"
+    "time": "19:00",
+    "lat" : 55.5455103305418,
+    "lng" : 11.724544327165944
   },
   {
     "name": "BROTHERHOOD MC",
     "address": "Stæremosen 22, 3250 Gilleleje",
     "days": ["Fredag"],
-    "time": "17:00"
+    "time": "17:00",
+    "lat" : 56.11182019791387,
+    "lng" : 12.319721940677711
   },
   {
     "name": "EXTERMINATORS MC",
     "address": "Beldringevej 203, 5270 Odense N",
     "days": ["Torsdag"],
-    "time": "19:00"
+    "time": "19:00",
+    "lat" : 55.462620322111356,
+    "lng" : 10.323890298327056
   },
   {
     "name": "FALCON´S MC",
-    "address": "Ørstedvej 54, 4130 Viby Sjælland",
+    "address": "Hammelvej 218, 8670 Langå",
     "days": ["Torsdag"],
-    "time": "19:00"
+    "time": "19:00",
+    "lat" : 56.340199358321755,
+    "lng" : 9.871182169521875
   },
   {
     "name": "WILD DEMONS MC",
     "address": "Ørstedvej 54, 4130 Viby Sjælland",
     "days": ["Tirsdag"],
-    "time": "19:00"
+    "time": "19:00",
+    "lat" : 55.54818193988735,
+    "lng" : 12.04188528298595
   },
   {
     "name": "WAYFINDERS MC",
     "address": "Industrivænget 8, 3320 Skævinge",
     "days": ["Onsdag", "Fredag"],
-    "time": "18:00"
+    "time": "18:00",
+    "lat" : 55.939791358840786,
+    "lng" : 12.185147056015799
   },
   {
     "name": "THE LAST VIKING",
     "address": "Hestehavebakken 96, 4400 Kalundborg",
     "days": ["Onsdag", "Fredag"],
     "time": "19:00",
-    "note": "Sidste Fredag"
+    "note": "Sidste Fredag",
+    "lat" : 55.69622694424112,
+    "lng" : 11.065924140663073
   },
   {
     "name": "LA FUTURA MC",
     "address": "Bistrupgade 12, 4700 Næstved",
     "days": ["Onsdag", "Fredag"],
-    "time": "19:00"
+    "time": "19:00",
+    "lat" : 55.223651776448776,
+    "lng" : 11.655096727154747
   },
   {
     "name": "BIKER BITCHES MC",
     "address": "Aalborgvej 22, 8620 Kjellerup",
     "days": ["Onsdag"],
-    "time": "18:30"
+    "time": "18:30",
+    "lat" : 56.26666494378879,
+    "lng" : 9.31990394068317
   },
   {
     "name": "GHOST RIDERS MC",
     "address": "Storegade 158A, 6560 Sommersted",
     "days": ["Onsdag"],
-    "time": "18:00"
+    "time": "18:00",
+    "lat" : 55.3129303161149,
+    "lng" : 9.285309040649727
   },
   {
     "name": "UNDERGROUND INCORPORATED MC",
     "address": "Nyborgvej 28B, 5550 Langeskov",
     "days": ["Torsdag"],
-    "time": "19:00"
+    "time": "19:00",
+    "lat" : 55.362441229265954,
+    "lng" : 10.601034884831606
   },
   {
     "name": "NO NAME MC EAST",
     "address": "Riserupvej 23, 4840 Nørrealslev",
     "days": ["Fredag"],
-    "time": "19:00"
+    "time": "19:00",
+    "lat" : 54.896716605089374,
+    "lng" : 11.800266540635318
   },
   {
     "name": "THE OTHERS MC",
     "address": "Marienbergvej 92, 4760 Vordingborg",
     "days": ["Tirsdag", "Fredag"],
-    "time": "17:30"
+    "time": "17:30",
+    "lat" : 55.00197805718563,
+    "lng" : 11.895683640638955
   },
   {
     "name": "KNIGHTS OF ODIN MC",
     "address": "Dalbyvej 90, 8722 Hedensted",
     "days": ["Fredag"],
     "time": "17:30",
-    "note": "Sidste Fredag"
+    "note": "Sidste Fredag",
+    "lat" : 55.76756242591405,
+    "lng" : 9.745065182993631
   },
   {
     "name": "POW MIA EAGLES MC",
     "address": "Møllerisvej 3, 3320 Skævinge",
     "days": ["Fredag"],
-    "time": "17:00"
+    "time": "17:00",
+    "lat" : 55.944947782315666,
+    "lng" : 12.185757369507924
   },
   {
     "name": "WHY NOT MC",
     "address": "Hellerupvej 15, 8800 Viborg",
     "days": ["Fredag"],
-    "time": "19:00"
+    "time": "19:00",
+    "lat" : 56.43273641281727,
+    "lng" : 9.285517656033246
   },
   {
     "name": "WRENCHING APES MC",
     "address": "Langgade 72, 7500 Holstebro",
     "days": ["Torsdag"],
-    "time": "19:00"
+    "time": "19:00",
+    "lat" : 56.370537068477894,
+    "lng" : 8.852692156031068
   },
   {
     "name": "RELOADED MC",
     "address": "juliesmindevej 21, 4180 sorø",
     "days": ["Tirsdag"],
-    "time": "18:00"
+    "time": "18:00",
+    "lat" : 55.46064701300058,
+    "lng" : 11.55737412716302
   },
   {
     "name": "PRIMUS MOTOR MC",
     "address": "Roskildevej 7A, 2680 Solrød",
     "days": ["Onsdag"],
     "time": "18:00",
-    "note": "Ulige uger"
+    "note": "Ulige uger",
+    "lat" : 55.54348788783805,
+    "lng" : 12.165759840657794
   },
   {
     "name": "Knucklemen",
     "address": "Greve bygade 28B, 2670 Greve",
     "days": ["Onsdag"],
     "time": "18:00",
-    "note": "Lige uger"
+    "note": "Lige uger",
+    "lat" : 55.59697067326726,
+    "lng" : 12.249121782987624
   },
   {
     "name": "LIBERTARIANS MC",
     "address": "Butterupvej 78, 4420 Regstrup",
     "days": ["Torsdag"],
-    "time": "18:30"
+    "time": "18:30",
+    "lat" : 55.693489895002976,
+    "lng" : 11.621775625318921
   },
   {
     "name": "Blue Wings MC",
@@ -276,24 +356,32 @@
     "address": "Hedeager 6, 2605 Brøndby",
     "days": ["Onsdag"],
     "time": "17:00",
-    "note": "Lige uger"
+    "note": "Lige uger",
+    "lat" : 56.26668281786539,
+    "lng" : 9.319925398355235
   },
   {
     "name": "DESPERADOS MC",
     "address": "Høm møllevej 12, 4100 Ringsted",
     "days": ["Tirsdag"],
-    "time": "19:00"
+    "time": "19:00",
+    "lat" : 55.42007906036451,
+    "lng" : 11.781963327161643
   },
   {
     "name": "GOD's BUSY MC",
     "address": "Nybyvej 17, 4060 Vipperød",
     "days": ["Fredag"],
-    "time": "18:00"
+    "time": "18:00",
+    "Lat" : 55.6595873700542,
+    "lng" : 11.741476169497869
   },
   {
   "name": "Next Level MC",
   "address": "Nykøbingvej 188, 4571 Grevinge",
   "days": ["Onsdag"],
-  "time": "18:00"
+  "time": "18:00",
+  "lat" : 55.799462968589204,
+  "lng" ; 11.602877927174882
 }
 ]
