@@ -3,7 +3,7 @@
     "name": "VENATORES MC",
     "address": "Kastanie alle 1, 4520 Svinninge",
     "days": ["Tirsdag"],
-    "time": "19:00"
+    "time": "19:00",
     "lat" : 55.716253, 
     "lng" : 11.461591
   },
