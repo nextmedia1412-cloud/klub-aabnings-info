@@ -245,14 +245,14 @@
     "name": "PRIMUS MOTOR MC",
     "address": "Roskildevej 7A, 2680 Solrød",
     "days": ["Onsdag"],
-    "time": "18:00"
+    "time": "18:00",
     "note": "Ulige uger"
   },
   {
     "name": "Knucklemen",
     "address": "Greve bygade 28B, 2670 Greve",
     "days": ["Onsdag"],
-    "time": "18:00"
+    "time": "18:00",
     "note": "Lige uger"
   },
   {
@@ -271,7 +271,7 @@
     "name": "North Riders Mc",
     "address": "Hedeager 6, 2605 Brøndby",
     "days": ["Onsdag"],
-    "time": "17:00"
+    "time": "17:00",
     "note": "Lige uger"
   },
   {
