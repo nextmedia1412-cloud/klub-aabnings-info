@@ -11,7 +11,9 @@
     "name": "THE CHOSEN MC",
     "address": "Brostykkevej 11, 4650 Hvidovre",
     "days": ["Torsdag"],
-    "time": "18:00"
+    "time": "18:00",
+    "lat" : 55.64044384325054,
+    "lng" : 12.497018456005398
   },
   {
     "name": "DESPERADOS MC",
