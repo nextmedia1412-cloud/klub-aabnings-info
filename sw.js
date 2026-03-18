@@ -1,4 +1,4 @@
-const CACHE_NAME = "nextlevel-shell-v1";
+const CACHE_NAME = "nextlevel-shell-v1.5";
 
 const SHELL_FILES = [
   "./",
