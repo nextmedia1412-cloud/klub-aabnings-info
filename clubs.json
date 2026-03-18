@@ -8,6 +8,14 @@
     "lng" : 11.461591
   },
   {
+  "name": "Madness MC",
+  "address": "Nørupvej 35, 4300 Holbæk",
+  "days": ["Onsdag"],
+  "time": "18:00",
+  "lat": 55.682028,
+  "lng": 11.64714
+  },
+  {
     "name": "THE CHOSEN MC",
     "address": "Brostykkevej 11, 4650 Hvidovre",
     "days": ["Torsdag"],
